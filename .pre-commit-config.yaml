@@ -1,6 +1,13 @@
 repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.2.0 # Get the latest from: https://github.com/pre-commit/pre-commit-hooks/releases
+  hooks:
+    - id: check-json
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
 - repo: https://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.64.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+  rev: v1.66.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
   hooks:
     - id: terraform_docs # https://github.com/terraform-docs/terraform-docs
     - id: terraform_fmt # https://www.terraform.io/cli/commands/fmt#usage

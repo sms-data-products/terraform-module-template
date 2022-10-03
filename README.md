@@ -12,7 +12,7 @@ N/A
 - [Requirements](#requirements)
 - [Providers](#providers)
 - [Modules](#modules)
-- [Resources](#resources)   
+- [Resources](#resources)
 - [Inputs](#inputs)
 - [Outputs](#outputs)
 - [Contributing](#contributing)
@@ -81,10 +81,10 @@ These tools are used to ensure validation and standardization of Terraform deplo
 
 #### Must be installed
 - [pre-commit](https://github.com/gruntwork-io/pre-commit/releases)
-- [terraform-docs](https://github.com/terraform-docs/terraform-docs)  
+- [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 - [tflint](https://github.com/terraform-linters/tflint)
 - [tfsec](https://github.com/aquasecurity/tfsec)
-  
+
 #### Provided by Terraform
 - [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
 - [terraform validate](https://www.terraform.io/docs/commands/validate.html)
