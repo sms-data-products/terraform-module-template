@@ -1,0 +1,10 @@
+# This configuration uses YAML instead of JSON to allow for inline comments
+---
+  minimum_severity: LOW
+  min_required_version: v1.18.0
+
+# Use these to configure repo wide Tfsec overrides
+#  severity_overrides:
+#    aws-s3-enable-versioning: LOW
+#  exclude:
+#    - aws-s3-enable-versioning
