@@ -32,21 +32,21 @@ terraform plan
 terraform apply
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.4.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.0 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.2.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.11.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.97.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.2.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.65.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.97.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.2.4 |
 
 ## Modules
 
@@ -72,7 +72,7 @@ No modules.
 | <a name="output_example_value"></a> [example\_value](#output\_example\_value) | Example variable |
 | <a name="output_null_resource_id"></a> [null\_resource\_id](#output\_null\_resource\_id) | An arbitrary value that changes each time the resource is replaced. |
 | <a name="output_partition"></a> [partition](#output\_partition) | AWS partition in which Terraform is working |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 ## Contributing
 Code quality and security will be validated before merge requests are accepted.
@@ -84,13 +84,39 @@ These tools are used to ensure validation and standardization of Terraform deplo
 - [pre-commit](https://github.com/gruntwork-io/pre-commit/releases)
 - [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 - [tflint](https://github.com/terraform-linters/tflint)
-- [tfsec](https://github.com/aquasecurity/tfsec)
+- [trivy](https://trivy.dev/latest/docs/)
 
 #### Provided by Terraform
 - [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
 - [terraform validate](https://www.terraform.io/docs/commands/validate.html)
 
 For more information see - [pre-commit-hooks-for-terraform](https://medium.com/slalom-build/pre-commit-hooks-for-terraform-9356ee6db882)
+
+### Setting up Trivy pre-commit hook
+Trivy is used to scan Terraform configurations for potential security issues. The pre-commit hook is configured in the `.pre-commit-config.yaml` file using [pre-commit-trivy](https://github.com/mxab/pre-commit-trivy):
+
+```yaml
+repos:
+- repo: https://github.com/mxab/pre-commit-trivy.git
+  rev: v0.15.0
+  hooks:
+  - id: trivyfs-docker
+    args:
+      - --skip-dirs
+      - ./tests
+      - . # scan path
+  - id: trivyconfig-docker
+    args:
+      - --skip-dirs
+      - ./tests
+      - . # scan path
+```
+
+This configuration:
+- Uses Docker to run trivy scans (no local installation needed)
+- Performs both filesystem and configuration scanning
+- Skips the `tests` directory
+- Creates a local `.pre-commit-trivy-cache` directory for caching
 
 ### To submit a merge request
 ```bash
@@ -106,7 +132,7 @@ pre-commit install
 ```
 
 # License
-Copyright (c) 2022
+Copyright (c) 2025
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
