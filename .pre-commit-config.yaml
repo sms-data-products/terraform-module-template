@@ -1,30 +1,42 @@
 repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0 # Get the latest from: https://github.com/pre-commit/pre-commit-hooks/releases
-  hooks:
-    - id: check-json
-    - id: check-yaml
-    - id: end-of-file-fixer
-    - id: trailing-whitespace
-- repo: https://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.78.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
-  hooks:
-    - id: terraform_docs # https://github.com/terraform-docs/terraform-docs
-    - id: terraform_fmt # https://www.terraform.io/cli/commands/fmt#usage
-    - id: terraform_tflint # https://github.com/terraform-linters/tflint/tree/master/docs
-      args:
-        - --args=--module
-        - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
-        - --args=--enable-rule=terraform_comment_syntax
-        - --args=--enable-rule=terraform_deprecated_index
-        - --args=--enable-rule=terraform_documented_variables
-        - --args=--enable-rule=terraform_documented_outputs
-        - --args=--enable-rule=terraform_naming_convention
-        - --args=--enable-rule=terraform_standard_module_structure
-        - --args=--enable-rule=terraform_typed_variables
-        - --args=--enable-rule=terraform_unused_declarations
-        - --args=--enable-rule=terraform_unused_required_providers
-    - id: terraform_tfsec # https://github.com/aquasecurity/tfsec/tree/master/docs/guides/configuration
-    - id: terraform_validate # https://www.terraform.io/cli/commands/validate
-    - id: terragrunt_fmt # https://terragrunt.gruntwork.io/docs/reference/cli-options/#hclfmt
-    - id: terragrunt_validate # Terragrunt forwards validate command directly to Terraform
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0 # Get the latest from: https://github.com/pre-commit/pre-commit-hooks/releases
+    hooks:
+      - id: check-json
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.99.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+    hooks:
+      - id: terraform_docs # https://github.com/terraform-docs/terraform-docs
+      - id: terraform_fmt # https://www.terraform.io/cli/commands/fmt#usage
+      - id: terraform_tflint # https://github.com/terraform-linters/tflint/tree/master/docs
+        args:
+          - --args=--call-module-type=all
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+          - --args=--enable-rule=terraform_comment_syntax
+          - --args=--enable-rule=terraform_deprecated_index
+          - --args=--enable-rule=terraform_documented_variables
+          - --args=--enable-rule=terraform_documented_outputs
+          - --args=--enable-rule=terraform_naming_convention
+          - --args=--enable-rule=terraform_standard_module_structure
+          - --args=--enable-rule=terraform_typed_variables
+          - --args=--enable-rule=terraform_unused_declarations
+          - --args=--enable-rule=terraform_unused_required_providers
+      - id: terraform_validate # https://www.terraform.io/cli/commands/validate
+      - id: terragrunt_fmt # https://terragrunt.gruntwork.io/docs/reference/cli-options/#hclfmt
+      - id: terragrunt_validate # Terragrunt forwards validate command directly to Terraform
+  - repo: https://github.com/mxab/pre-commit-trivy.git
+    rev: v0.15.0
+    hooks:
+      - id: trivyfs-docker
+        args:
+          - --skip-dirs
+          - ./tests
+          - . # last arg indicates the path/file to scan
+      - id: trivyconfig-docker
+        args:
+          - --skip-dirs
+          - ./tests
+          - . # last arg indicates the path/file to scan

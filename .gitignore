@@ -63,5 +63,7 @@ terraform.rc
 # Terragrunt
 .terragrunt-cache
 
-# Tfsec
-.tfsec/cache
+# Trivy
+.pre-commit-trivy-cache
+
+**/.claude/settings.local.json
